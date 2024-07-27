@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <title>Easybank - Next Generation Digital Banking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark-blue: #2d314d;
+            --primary-lime-green: #31d35c;
+            --primary-bright-cyan: #2bb7da;
+            --neutral-grayish-blue: #9698a6;
+            --neutral-light-grayish-blue: #f3f4f6;
+            --neutral-very-light-gray: #fafafa;
+            --neutral-white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Public Sans', sans-serif;
+            font-size: 18px;
+            line-height: 1.5;
+            color: var(--primary-dark-blue);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--neutral-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            height: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--neutral-grayish-blue);
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-dark-blue);
+        }
+        .nav-links a:hover {
+            color: var(--primary-lime-green);
+        }
+
+        .btn {
+            background: linear-gradient(to right, var(--primary-lime-green), var(--primary-bright-cyan));
+            color: var(--neutral-white);
+            padding: 12px 30px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        .mobile-menu-toggle {
+        display: none;
+        cursor: pointer;
+        z-index: 1000;
+    }
+
+        .bar1, .bar2, .bar3 {
+        width: 35px;
+        height: 5px;
+        background-color: #333;
+        margin: 6px 0;
+        transition: 0.4s;
+    }
+
+        /* Hero Section Styles */
+        .hero {
+            background-color: var(--neutral-very-light-gray);
+            padding-top: 80px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            padding: 60px 0;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            color: var(--neutral-grayish-blue);
+            margin-bottom: 36px;
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -300px;
+            width: 1000px;
+            height: 1000px;
+            background-image: url('https://picsum.photos/1000/1000?random=1');
+            background-repeat: no-repeat;
+            background-size: contain;
+            z-index: -1;
+        }
+
+        /* Features Section Styles */
+        .features {
+            background-color: var(--neutral-light-grayish-blue);
+            padding: 80px 0;
+        }
+
+        .features h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 24px;
+        }
+
+        .features-intro {
+            max-width: 600px;
+            margin-bottom: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-item {
+            background-color: var(--neutral-white);
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+        }
+
+        .feature-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-item p {
+            color: var(--neutral-grayish-blue);
+            font-size: 0.9rem;
+        }
+
+        /* Articles Section Styles */
+        .articles {
+            background-color: var(--neutral-very-light-gray);
+            padding: 80px 0;
+        }
+        .articles h3 {
+            cursor: pointer;
+        }
+        .articles h3:hover {
+            color: var(--primary-lime-green);
+        }
+
+        .articles h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .article-item {
+            background-color: var(--neutral-white);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .article-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .article-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .article-content {
+            padding: 24px;
+        }
+
+        .article-author {
+            font-size: 0.8rem;
+            color: var(--neutral-grayish-blue);
+            margin-bottom: 12px;
+        }
+
+        .article-title {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        .article-excerpt {
+            font-size: 0.9rem;
+            color: var(--neutral-grayish-blue);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: var(--primary-dark-blue);
+            color: var(--neutral-white);
+            padding: 60px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer-logo {
+            margin-bottom: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            color: var(--neutral-white);
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--primary-lime-green);
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .footer-links a {
+            color: var(--neutral-white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-lime-green);
+        }
+
+        .footer-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .footer-right .btn {
+            margin-bottom: 30px;
+        }
+
+        .copyright {
+            color: var(--neutral-grayish-blue);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: greenyellow;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Styles */
+         @media screen and (max-width: 768px) {
+        .mobile-menu-toggle {
+            display: block;
+        }
+
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(244, 244, 244, 0.9);
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 1rem 0;
+        }
+    }
+
+    /* Styles for the transformed hamburger icon */
+    .mobile-menu-toggle.active .bar1 {
+        transform: rotate(-45deg) translate(-9px, 6px);
+    }
+
+    .mobile-menu-toggle.active .bar2 {
+        opacity: 0;
+    }
+
+    .mobile-menu-toggle.active .bar3 {
+        transform: rotate(45deg) translate(-8px, -8px);
+    }
+
+        @media (max-width: 768px) {
+            .nav-links, .header .btn {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .hero-text {
+                padding-right: 0;
+                margin-top: 40px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .features-intro, .articles h2 {
+                text-align: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-left, .footer-right {
+                align-items: center;
+                margin-bottom: 30px;
+            }
+
+            .footer-links {
+                grid-template-columns: 1fr;
+                margin-bottom: 30px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <svg xmlns="http://www.w3.org/2000/svg" width="139" height="20"><defs><linearGradient id="a" x1="72.195%" x2="17.503%" y1="0%" y2="100%"><stop offset="0%" stop-color="#33D35E"/><stop offset="100%" stop-color="#2AB6D9"/></linearGradient></defs><g fill="none" fill-rule="evenodd"><path fill="#2D314D" fill-rule="nonzero" d="M37.754 15.847c2.852 0 5.152-1.622 5.952-4.216h-3.897c-.376.665-1.14 1.066-2.055 1.066-1.237 0-2.065-.674-2.32-1.978h8.44c.051-.352.081-.694.081-1.037 0-3.335-2.537-5.95-6.201-5.95-3.568 0-6.175 2.564-6.175 6.049 0 3.473 2.628 6.066 6.175 6.066zm2.344-7.297h-4.596c.317-1.129 1.11-1.749 2.252-1.749 1.181 0 2 .613 2.344 1.75zm10.946 7.296c1.32 0 2.5-.434 3.43-1.188l.336.804h3.027V4.093h-2.919l-.4.88c-.94-.775-2.135-1.222-3.474-1.222-3.476 0-5.961 2.505-5.961 6.026 0 3.533 2.485 6.07 5.961 6.07zm.524-3.467c-1.467 0-2.545-1.108-2.545-2.593 0-1.475 1.069-2.583 2.545-2.583 1.466 0 2.544 1.108 2.544 2.583 0 1.485-1.078 2.593-2.544 2.593zm13.123 3.467c3.02 0 5.025-1.554 5.025-3.93 0-2.883-2.387-3.256-4.183-3.575-1.08-.193-1.95-.344-1.95-.99 0-.527.422-.838 1.05-.838.71 0 1.197.337 1.197 1.063h3.667c-.044-2.303-1.92-3.843-4.816-3.843-2.912 0-4.854 1.47-4.854 3.75 0 2.757 2.337 3.289 4.1 3.574 1.092.181 1.952.368 1.952 1.024 0 .587-.543.88-1.116.88-.742 0-1.32-.383-1.32-1.214h-3.77c.036 2.463 1.919 4.1 5.018 4.1zm8.1 3.858c2.936 0 4.344-1.257 5.877-4.736l4.764-10.863h-4.206l-2.249 6.263-2.412-6.263H70.31l4.698 10.43c-.53 1.414-.983 1.804-2.48 1.804H71.45v3.365h1.341zm18.504-3.858c3.5 0 5.973-2.515 5.973-6.048S94.796 3.75 91.295 3.75a5.332 5.332 0 00-2.825.784V0H84.6v15.474h2.897l.37-.844c.923.771 2.102 1.216 3.428 1.216zm-.523-3.467c-1.467 0-2.545-1.108-2.545-2.58 0-1.486 1.078-2.594 2.545-2.594 1.466 0 2.544 1.108 2.544 2.593 0 1.473-1.087 2.58-2.544 2.58zm13.598 3.467c1.32 0 2.5-.434 3.43-1.188l.336.804h3.027V4.093h-2.918l-.401.88c-.939-.775-2.135-1.222-3.474-1.222-3.476 0-5.96 2.505-5.96 6.026 0 3.533 2.484 6.07 5.96 6.07zm.524-3.467c-1.467 0-2.545-1.108-2.545-2.593 0-1.475 1.07-2.583 2.545-2.583 1.467 0 2.545 1.108 2.545 2.583 0 1.485-1.078 2.593-2.545 2.593zm12.653 3.095V9.403c0-1.447.702-2.3 1.923-2.3.986 0 1.483.657 1.483 1.98v6.39h3.915V8.543c0-2.897-1.733-4.773-4.373-4.773-1.47 0-2.733.565-3.58 1.508l-.537-1.172h-2.747v11.369h3.916zm13.748 0v-4.808l2.848 4.808h4.616l-3.902-5.95 3.543-5.419h-4.397l-2.708 4.454V0h-3.916v15.474h3.916z"/><g fill="url(#a)"><path d="M10.802 0L0 19.704h5.986L16.789 0z"/><path opacity=".5" d="M18.171 0L7.368 19.704h5.986L24.157 0z"/><path opacity=".15" d="M25.539 0L14.737 19.704h5.986L31.525 0z"/></g></g></svg>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                </ul>
+                <a href="#" class="btn">Request Invite</a>
+                <div class="mobile-menu-toggle">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text animate-fadeInUp">
+                        <h1>Next generation digital banking</h1>
+                        <p>Take your financial life online. Your Easybank account will be a one-stop-shop for spending, saving, budgeting, investing, and much more.</p>
+                        <a href="#" class="btn">Request Invite</a>
+                    </div>
+                    <div class="hero-image animate-fadeInUp">
+                        <img src="images\image-mockups.png" alt="Easybank mobile app">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="about">
+            <div class="container">
+                <div class="features-intro animate-fadeInUp">
+                    <h2>Why choose Easybank?</h2>
+                    <p>We leverage Open Banking to turn your bank account into your financial hub. Control your finances like never before.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-item animate-fadeInUp">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72"><defs><linearGradient id="a" x1="0%" x2="99.58%" y1="0%" y2="99.58%"><stop offset="0%" stop-color="#33D35E"/><stop offset="100%" stop-color="#2AB6D9"/></linearGradient></defs><g fill="none" fill-rule="evenodd"><circle cx="36" cy="36" r="36" fill="url(#a)"/><path fill="#FFF" fill-rule="nonzero" d="M45.984 16a3.336 3.336 0 013.332 3.332v3.727l4.11 4.118a8.72 8.72 0 012.553 6.141v21.994a.666.666 0 01-.667.667H43.32a.666.666 0 01-.667-.667V48.84l-.382-.612a9.632 9.632 0 01-.83-8.553L25.799 45.7a3.332 3.332 0 01-4.307-1.91l-2.504-6.502A3.325 3.325 0 0116 33.99V19.332A3.336 3.336 0 0119.332 16zm8.662 33.316h-10.66v5.33h10.66v-5.33zm-7.996 1.332v1.333h-1.332v-1.333h1.332zm3.675-24.69l2.255 5.855a3.332 3.332 0 01-1.91 4.305l-.683.266 2.465 2.466-.942.942-10.618-10.615a2.222 2.222 0 00-3.209 3.073l5.46 5.957c.196.213.232.53.088.78a8.309 8.309 0 00.169 8.534l.289.462h10.957V33.318a7.379 7.379 0 00-2.162-5.198l-2.159-2.163zm-9.798 11.36H29.565v.004l-7.953 3.065 1.124 2.923a1.999 1.999 0 002.584 1.147l16.073-6.195-.866-.944zm-14.658.004h-5.44l.702 1.824 4.738-1.824zm20.115-19.99H19.332a2 2 0 00-2 2V33.99a2 2 0 002 2h19.974l-2.602-2.843a3.555 3.555 0 015.13-4.916l6.104 6.105c.025-.114.04-.23.045-.346V23.582l-.006-.015h.006v-4.235a2 2 0 00-1.999-2zm3.332 9.712v6.946a3.332 3.332 0 01-.282 1.333l1.156-.446a1.999 1.999 0 001.148-2.584l-2.022-5.25zm-27.32 4.281v1.333h-2.664v-1.333h2.665zm11.994 0v1.333h-2.665v-1.333h2.665zm-11.993-3.998v1.333h-2.665v-1.333h2.665zm3.998 0v1.333h-2.666v-1.333h2.666zm3.998 0v1.333h-2.666v-1.333h2.666zm3.997 0v1.333h-2.665v-1.333h2.665zm-10.394-8.662c.957 0 1.732.776 1.732 1.733v3.198c0 .957-.775 1.732-1.732 1.732h-3.198a1.732 1.732 0 01-1.733-1.732v-3.198c0-.957.776-1.733 1.733-1.733zm0 1.333h-3.198a.4.4 0 00-.4.4v.932h1.332v1.333h-1.332v.933c0 .22.179.4.4.4h3.198a.4.4 0 00.4-.4v-.933h-1.333V21.33h1.333v-.932a.4.4 0 00-.4-.4zm21.722-.666v1.998h-1.333v-1.998h1.333zm-2.666 0v1.998H41.32v-1.998h1.332zm-2.665 0v1.998h-1.332v-1.998h1.332zm-2.665 0v1.998h-1.333v-1.998h1.333z"/></g></svg>
+                        <h3>Online Banking</h3>
+                        <p>Our modern web and mobile applications allow you to keep track of your finances wherever you are in the world.</p>
+                    </div>
+                    <div class="feature-item animate-fadeInUp">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72"><defs><linearGradient id="a" x1="0%" x2="99.58%" y1="0%" y2="99.58%"><stop offset="0%" stop-color="#33D35E"/><stop offset="100%" stop-color="#2AB6D9"/></linearGradient></defs><g fill="none" fill-rule="evenodd"><circle cx="36" cy="36" r="36" fill="url(#a)"/><path fill="#FFF" fill-rule="nonzero" d="M44.633 16a3.096 3.096 0 013.092 3.092v7.57c5.23.286 9.393 4.365 9.393 9.338 0 4.973-4.162 9.052-9.393 9.338v7.57A3.095 3.095 0 0144.633 56H27.099a3.095 3.095 0 01-3.092-3.092v-7.24a.587.587 0 111.174 0v3.522h21.37v-3.852a10.479 10.479 0 01-2.89-.568l-4.383 2.391c-.466.254-1.013-.22-.833-.716l1.308-3.596h-6.705a.592.592 0 01-.415-.172l-4.697-4.696a.593.593 0 01-.172-.415V24.728c0-.324.263-.587.587-.587h15.03c.324 0 .587.263.587.587v2.402c.819-.258 1.685-.419 2.583-.468v-4.478H25.18v20.704a.587.587 0 11-1.174 0V19.092A3.096 3.096 0 0127.099 16zm1.918 34.364H25.18v2.544a1.92 1.92 0 001.918 1.918h17.534a1.92 1.92 0 001.918-1.918v-2.544zm-9.433.705c.325 0 .587.262.587.587v1.878a.587.587 0 01-.587.587h-2.505a.587.587 0 01-.587-.587v-1.878c0-.325.263-.587.587-.587zm-.587 1.174h-1.33v.704h1.33v-.704zM47.138 27.82c-4.856 0-8.806 3.67-8.806 8.18 0 2.217.94 4.293 2.647 5.846.177.16.239.41.157.635l-1.056 2.905 3.251-1.773a.587.587 0 01.49-.034 9.343 9.343 0 003.317.601c4.856 0 8.806-3.67 8.806-8.18s-3.95-8.18-8.806-8.18zm0 1.33c.324 0 .587.264.587.588v1.291h.04a2.469 2.469 0 012.465 2.466v.626a.587.587 0 11-1.174 0v-.626c0-.712-.58-1.291-1.292-1.291h-.94c-.884 0-1.604.72-1.604 1.604 0 .885.72 1.605 1.605 1.605h.626a2.782 2.782 0 012.779 2.779c0 1.44-1.1 2.627-2.505 2.765v1.305a.587.587 0 11-1.174 0v-1.291h-.04a2.469 2.469 0 01-2.465-2.466.587.587 0 111.174 0c0 .712.58 1.291 1.292 1.291h.939c.885 0 1.605-.72 1.605-1.604 0-.885-.72-1.605-1.605-1.605h-.626a2.782 2.782 0 01-2.78-2.779c0-1.44 1.102-2.627 2.506-2.765v-1.305c0-.324.263-.587.587-.587zm-4.345-3.835H28.938v11.663h4.11c.324 0 .587.263.587.588v4.11h5.567c-1.327-1.622-2.044-3.593-2.044-5.676 0-1.112.208-2.18.59-3.17h-6.266a.587.587 0 110-1.174h6.82c.399-.711.893-1.369 1.466-1.957h-2.023a.587.587 0 110-1.174h3.13c.076 0 .148.014.214.04.53-.38 1.1-.71 1.704-.985v-2.265zM32.461 38.153h-2.692l2.692 2.692v-2.692zm3.405-3.366a.587.587 0 110 1.174h-4.384a.587.587 0 110-1.174zm-.626-6.263a.587.587 0 110 1.175h-3.758a.587.587 0 110-1.175zm9.393-11.35H27.099a1.92 1.92 0 00-1.918 1.918v1.918h21.37v-1.918a1.92 1.92 0 00-1.918-1.918zm-7.515 1.33a.587.587 0 110 1.175h-2.505a.587.587 0 110-1.174z"/></g></svg>
+                        <h3>Simple Budgeting</h3>
+                        <p>See exactly where your money goes each month. Receive notifications when you're close to hitting your limits.</p>
+                    </div>
+                    <div class="feature-item animate-fadeInUp">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72"><defs><linearGradient id="a" x1="0%" x2="99.58%" y1="0%" y2="99.58%"><stop offset="0%" stop-color="#33D35E"/><stop offset="100%" stop-color="#2AB6D9"/></linearGradient></defs><g fill="none" fill-rule="evenodd"><circle cx="36" cy="36" r="36" fill="url(#a)"/><path fill="#FFF" fill-rule="nonzero" d="M36 16a4.522 4.522 0 014.516 4.516 4.514 4.514 0 01-1.951 3.713c2.647 1.031 4.532 3.601 4.532 6.61v3.226h-6.452v.645c0 .356.29.645.645.645h1.29c1.068 0 1.936.868 1.936 1.935v1.29a1.938 1.938 0 01-1.935 1.936h-1.153l.69.69-.964 1.59c.047.1.081.2.124.3h6.287a5.146 5.146 0 01-1.759-3.87 5.167 5.167 0 015.162-5.161 5.167 5.167 0 015.161 5.16 5.154 5.154 0 01-1.904 4c3.283.621 5.775 3.507 5.775 6.969V56H41.161v-7.42a.969.969 0 00-.967-.967h-.968v1.15l-1.802.443c-.08.215-.17.43-.269.642l.963 1.59-3.453 3.454-1.59-.963c-.214.1-.428.19-.642.268L31.99 56h-4.883l-.442-1.802a8.519 8.519 0 01-.642-.268l-1.59.962-3.454-3.453.963-1.59a8.632 8.632 0 01-.268-.642l-1.803-.443V43.88l1.803-.443c.079-.214.169-.428.268-.642l-.963-1.59.69-.69h-1.153a1.938 1.938 0 01-1.935-1.935v-1.29c0-1.068.868-1.936 1.935-1.936h1.29a.645.645 0 00.646-.645v-.645H16v-3.226c0-3.009 1.885-5.579 4.532-6.61a4.514 4.514 0 01-1.951-3.713A4.522 4.522 0 0123.097 16a4.522 4.522 0 014.516 4.516 4.514 4.514 0 01-1.952 3.713 7.126 7.126 0 013.887 3.67 7.128 7.128 0 013.887-3.67 4.514 4.514 0 01-1.951-3.713A4.522 4.522 0 0136 16zm12.903 28.387H31.806a.969.969 0 000 1.936h8.388a2.26 2.26 0 012.258 2.258v6.129h9.032v-7.097h1.29v7.097h1.936v-4.516a5.813 5.813 0 00-5.807-5.807zm-17.925-6.452h-2.86l-.37 1.514-.347.11a7.029 7.029 0 00-1.113.465l-.32.167-1.339-.81-2.021 2.022.81 1.338-.168.32a7.08 7.08 0 00-.465 1.114l-.11.346-1.514.372v2.86l1.514.37.109.347c.117.368.273.743.466 1.113l.167.32-.81 1.339 2.021 2.021 1.338-.81.322.168c.37.192.744.349 1.114.466l.344.11.373 1.513h2.86l.37-1.514.346-.109a7.029 7.029 0 001.113-.466l.322-.167 1.338.81 2.021-2.021-.81-1.338.167-.322c.193-.37.35-.744.467-1.114l.11-.344 1.512-.373v-.14H35.21a5.813 5.813 0 01-5.662 4.517 5.813 5.813 0 01-5.806-5.806 5.813 5.813 0 015.806-5.807c1.936 0 3.74.985 4.813 2.581h1.503l-.017-.034-.167-.322.81-1.338-2.022-2.021-1.338.81-.321-.167a7.08 7.08 0 00-1.113-.466l-.346-.11-.372-1.514zm-1.43 3.871a4.522 4.522 0 00-4.516 4.517 4.522 4.522 0 004.516 4.516 4.521 4.521 0 004.327-3.226h-1.371a3.225 3.225 0 11-1.71-4.265 2.234 2.234 0 011.012-.251h.898a4.533 4.533 0 00-3.156-1.29zm0 2.581a1.938 1.938 0 00-1.935 1.936c0 1.067.868 1.935 1.935 1.935.623 0 1.184-.3 1.542-.773a2.253 2.253 0 01-1.542-2.13c0-.337.08-.653.212-.94-.071-.009-.14-.028-.212-.028zm17.42-9.032a3.875 3.875 0 00-3.871 3.87 3.875 3.875 0 003.87 3.872 3.875 3.875 0 003.872-3.871 3.875 3.875 0 00-3.871-3.871zm-11.613-1.29H23.742v.645a1.938 1.938 0 01-1.936 1.935h-1.29a.645.645 0 00-.645.645v1.29c0 .357.289.646.645.646h2.443l1.473-1.472 1.59.962c.213-.1.428-.189.642-.268l.443-1.803h4.883l.443 1.803c.214.08.428.169.642.268l1.59-.962 1.472 1.472h2.444a.645.645 0 00.645-.645v-1.29a.645.645 0 00-.645-.646h-1.29a1.938 1.938 0 01-1.936-1.935v-.645zm-12.258-9.033a5.813 5.813 0 00-5.807 5.807v1.935h1.936v-5.161h1.29v5.161h5.161v-5.161h1.29v5.161h1.936V30.84a5.813 5.813 0 00-5.806-5.807zm12.903 0a5.813 5.813 0 00-5.806 5.807v1.935h1.935v-5.161h1.29v5.161h5.162v-5.161h1.29v5.161h1.935V30.84A5.813 5.813 0 0036 25.032zm15.484-1.29A4.522 4.522 0 0156 28.258a4.522 4.522 0 01-4.516 4.516h-7.097v-4.516a4.522 4.522 0 014.516-4.516zm0 1.29h-2.58a3.23 3.23 0 00-3.227 3.226v3.226h5.807a3.23 3.23 0 003.226-3.226 3.23 3.23 0 00-3.226-3.226zm-3.226 3.871v1.29h-1.29v-1.29h1.29zm2.58 0v1.29h-1.29v-1.29h1.29zm2.581 0v1.29h-1.29v-1.29h1.29zm0-2.58v1.29h-6.451v-1.29h6.451zM23.097 17.29a3.23 3.23 0 00-3.226 3.226 3.23 3.23 0 003.226 3.226 3.23 3.23 0 003.226-3.226 3.23 3.23 0 00-3.226-3.226zm12.903 0a3.23 3.23 0 00-3.226 3.226A3.23 3.23 0 0036 23.742a3.23 3.23 0 003.226-3.226A3.23 3.23 0 0036 17.29z"/></g></svg>
+                        <h3>Fast Onboarding</h3>
+                        <p>We don't do branches. Open your account in minutes online and start taking control of your finances right away.</p>
+                    </div>
+                    <div class="feature-item animate-fadeInUp">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72"><defs><linearGradient id="a" x1="0%" x2="99.58%" y1="0%" y2="99.58%"><stop offset="0%" stop-color="#33D35E"/><stop offset="100%" stop-color="#2AB6D9"/></linearGradient></defs><g fill="none" fill-rule="evenodd"><circle cx="36" cy="36" r="36" fill="url(#a)"/><path fill="#FFF" fill-rule="nonzero" d="M26.118 28.339a.586.586 0 111.135.292c-.04.156-.06.317-.06.48V42.89c0 1.058.86 1.919 1.918 1.919H42.89c.163 0 .324-.02.48-.06a.586.586 0 11.292 1.134 3.102 3.102 0 01-.772.098h-1.293v1.767c0 .345.134.67.379.914l3.855 3.855a1.84 1.84 0 012.116.346 1.84 1.84 0 010 2.6c-.358.358-.829.537-1.3.537-.47 0-.941-.18-1.3-.538a1.84 1.84 0 01-.345-2.116l-3.855-3.855a2.448 2.448 0 01-.722-1.743V45.98h-1.333v2.545a.586.586 0 01-1.172 0V45.98h-1.333v9.434a.586.586 0 01-1.172 0V45.98h-1.333v2.545a.586.586 0 01-1.172 0V45.98h-1.333v5.187a1.841 1.841 0 011.253 1.742 1.84 1.84 0 01-1.839 1.838 1.84 1.84 0 01-1.838-1.838c0-.809.525-1.497 1.252-1.742V45.98h-1.293a3.094 3.094 0 01-3.09-3.091v-1.293h-1.768c-.345 0-.67.134-.914.379l-3.854 3.853c.125.251.192.53.192.818 0 .492-.191.953-.538 1.3a1.827 1.827 0 01-1.3.539c-.492 0-.953-.191-1.3-.539a1.827 1.827 0 01-.539-1.3c0-.49.191-.952.538-1.3a1.827 1.827 0 011.3-.538c.29 0 .567.067.819.192l3.853-3.854a2.448 2.448 0 011.743-.722h1.767v-1.333h-2.545a.586.586 0 010-1.172h2.545v-1.333h-9.434a.586.586 0 010-1.172h9.434v-1.333h-2.545a.586.586 0 010-1.172h2.545v-1.333h-5.187a1.841 1.841 0 01-1.742 1.252 1.84 1.84 0 01-1.838-1.838 1.84 1.84 0 011.838-1.839c.809 0 1.497.526 1.742 1.253h5.187v-1.293c0-.261.033-.521.098-.772zm20.528 25.156a.665.665 0 00-.47 1.138.667.667 0 10.47-1.138zM30.99 52.243a.667.667 0 10.002 1.334.667.667 0 00-.002-1.334zM17.838 45.98a.662.662 0 00-.47.195.662.662 0 00-.196.471.662.662 0 00.667.667.662.662 0 00.667-.667.662.662 0 00-.196-.47.662.662 0 00-.472-.196zM36 16c.324 0 .586.262.586.586v9.434h1.333v-2.545a.586.586 0 011.172 0v2.545h1.333v-5.187a1.841 1.841 0 01-1.252-1.742 1.84 1.84 0 011.838-1.838 1.84 1.84 0 011.839 1.838c0 .809-.526 1.497-1.253 1.742v5.187h1.293a3.094 3.094 0 013.09 3.091v1.293h1.768c.345 0 .67-.135.914-.379l3.854-3.853a1.83 1.83 0 01-.192-.818c0-.492.191-.953.539-1.3a1.827 1.827 0 011.3-.539c.49 0 .952.191 1.3.539.347.347.538.809.538 1.3 0 .49-.191.952-.538 1.3a1.827 1.827 0 01-1.3.538 1.83 1.83 0 01-.819-.192l-3.853 3.854a2.448 2.448 0 01-1.743.722H45.98v1.333h2.545a.586.586 0 010 1.172H45.98v1.333h9.434a.586.586 0 110 1.172H45.98v1.333h2.545a.586.586 0 010 1.172H45.98v1.333h5.187a1.841 1.841 0 011.742-1.252 1.84 1.84 0 011.838 1.838 1.84 1.84 0 01-1.838 1.838 1.841 1.841 0 01-1.742-1.252H45.98v1.293a3.1 3.1 0 01-.097.771.586.586 0 11-1.135-.291c.04-.156.06-.317.06-.48V29.11c0-1.058-.861-1.919-1.92-1.919H29.112c-.163 0-.324.02-.48.06a.586.586 0 11-.292-1.134c.251-.065.51-.098.772-.098h1.293v-1.767c0-.345-.134-.67-.379-.914l-3.855-3.855a1.841 1.841 0 01-2.116-.345 1.84 1.84 0 010-2.6 1.84 1.84 0 012.6 0 1.84 1.84 0 01.345 2.116l3.855 3.855c.466.466.722 1.085.722 1.743v1.767h1.333v-2.545a.586.586 0 011.172 0v2.545h1.333v-9.434c0-.324.262-.586.586-.586zm1.761 13.151c1.295 0 2.348.966 2.348 2.152a2 2 0 01-.058.472c1.255.345 2.171 1.406 2.171 2.66 0 .702-.3 1.372-.815 1.878.516.507.815 1.177.815 1.879 0 .955-.544 1.84-1.414 2.344-.087 1.288-1.262 2.313-2.694 2.313A2.796 2.796 0 0136 41.914a2.796 2.796 0 01-2.114.935c-1.488 0-2.7-1.106-2.7-2.465-.876-.579-1.408-1.509-1.408-2.505 0-.655.226-1.27.617-1.777a2.573 2.573 0 01-.617-1.668c0-1.253.916-2.314 2.171-2.66a2 2 0 01-.058-.47c0-1.187 1.053-2.153 2.348-2.153.7 0 1.33.284 1.761.732a2.437 2.437 0 011.761-.732zm0 1.172c-.648 0-1.175.44-1.175.98a.586.586 0 01-1.172 0c0-.54-.527-.98-1.175-.98-.649 0-1.176.44-1.176.98a.87.87 0 00.215.562v.001l.029.037.008.01.013.022a.586.586 0 01-.497.895l-.016-.001c-1.03.006-1.865.724-1.866 1.605 0 .319.112.625.32.886a3.57 3.57 0 011.075-.438.586.586 0 01.262 1.142c-.975.224-1.657.987-1.657 1.855 0 .481.216.942.586 1.292.1-.163.222-.315.362-.455a.586.586 0 11.826.831c-.235.234-.365.531-.365.837 0 .713.686 1.293 1.528 1.293.843 0 1.528-.58 1.528-1.293V39.13c0-.537-.401-1.025-.999-1.212a.586.586 0 01.351-1.118c.234.073.45.175.648.3v-3.254a.586.586 0 011.172 0v.749c.434-.274.96-.434 1.527-.434a.586.586 0 010 1.172c-.842 0-1.527.58-1.527 1.292v3.758c0 .713.685 1.293 1.527 1.293.843 0 1.528-.58 1.528-1.293 0-.538-.401-1.025-.999-1.213a.586.586 0 11.352-1.118 2.63 2.63 0 011.54 1.24c.324-.294.516-.688.516-1.101 0-.554-.337-1.063-.901-1.36a.586.586 0 010-1.037c.564-.298.901-.807.901-1.36 0-.882-.835-1.6-1.865-1.606h-.024a2.118 2.118 0 00-.819.164.586.586 0 11-.455-1.08c.306-.13.628-.21.962-.241a.824.824 0 00.088-.369c0-.54-.528-.98-1.176-.98zm15.148 10.02a.667.667 0 10.001 1.335.667.667 0 000-1.334zm-33.818-10.02a.667.667 0 10.001 1.335.667.667 0 00-.001-1.335zm35.07-5.636a.662.662 0 00-.47.195.662.662 0 00-.196.472.662.662 0 00.667.667c.178 0 .345-.07.47-.196a.662.662 0 00.196-.471.662.662 0 00-.195-.472.662.662 0 00-.471-.195zm-13.15-6.263a.667.667 0 100 1.335.667.667 0 000-1.335zm-15.657-1.252a.667.667 0 10.002 1.333.667.667 0 00-.002-1.333z"/></g></svg>
+                        <h3>Open API</h3>
+                        <p>Manage your savings, investments, pension, and much more from one account. Tracking your money has never been easier.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="articles" id="blog">
+            <div class="container">
+                <h2 class="animate-fadeInUp">Latest Articles</h2>
+                <div class="articles-grid">
+                    <article class="article-item animate-fadeInUp">
+                        <div class="article-image">
+                            <img src="images\image-currency.jpg" alt="Currency">
+                        </div>
+                        <div class="article-content">
+                            <p class="article-author">By Claire Robinson</p>
+                            <h3 class="article-title">Receive money in any currency with no fees</h3>
+                            <p class="article-excerpt">The world is getting smaller and we're becoming more mobile. So why should you be forced to only receive money in a single …</p>
+                        </div>
+                    </article>
+                    <article class="article-item animate-fadeInUp">
+                        <div class="article-image">
+                            <img src="images\image-restaurant.jpg" alt="Currency">
+                        </div>
+                        <div class="article-content">
+                            <p class="article-author">By Wilson Hutton</p>
+                            <h3 class="article-title">Treat yourself without worrying about money</h3>
+                            <p class="article-excerpt">Our simple budgeting feature allows you to separate out your spending and set realistic limits each month. That means you …</p>
+                        </div>
+                    </article>
+                    <article class="article-item animate-fadeInUp">
+                        <div class="article-image">
+                            <img src="images\image-plane.jpg" alt="Airplane wing">
+                        </div>
+                        <div class="article-content">
+                            <p class="article-author">By Wilson Hutton</p>
+                            <h3 class="article-title">Take your Easybank card wherever you go</h3>
+                            <p class="article-excerpt">We want you to enjoy your travels. This is why we don't charge any fees on purchases while you're abroad. We'll even show you …</p>
+                        </div>
+                    </article>
+                    <article class="article-item animate-fadeInUp">
+                        <div class="article-image">
+                            <img src="images\image-confetti.jpg" alt="Starry sky">
+                        </div>
+                        <div class="article-content">
+                            <p class="article-author">By Claire Robinson</p>
+                            <h3 class="article-title">Our invite-only Beta accounts are now live!</h3>
+                            <p class="article-excerpt">After a lot of hard work by the whole team, we're excited to launch our closed beta. It's easy to request an invite through the site ...</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="139" height="20"><defs><linearGradient id="a" x1="72.195%" x2="17.503%" y1="0%" y2="100%"><stop offset="0%" stop-color="#33D35E"/><stop offset="100%" stop-color="#2AB6D9"/></linearGradient></defs><g fill="none" fill-rule="evenodd"><path fill="#2D314D" fill-rule="nonzero" d="M37.754 15.847c2.852 0 5.152-1.622 5.952-4.216h-3.897c-.376.665-1.14 1.066-2.055 1.066-1.237 0-2.065-.674-2.32-1.978h8.44c.051-.352.081-.694.081-1.037 0-3.335-2.537-5.95-6.201-5.95-3.568 0-6.175 2.564-6.175 6.049 0 3.473 2.628 6.066 6.175 6.066zm2.344-7.297h-4.596c.317-1.129 1.11-1.749 2.252-1.749 1.181 0 2 .613 2.344 1.75zm10.946 7.296c1.32 0 2.5-.434 3.43-1.188l.336.804h3.027V4.093h-2.919l-.4.88c-.94-.775-2.135-1.222-3.474-1.222-3.476 0-5.961 2.505-5.961 6.026 0 3.533 2.485 6.07 5.961 6.07zm.524-3.467c-1.467 0-2.545-1.108-2.545-2.593 0-1.475 1.069-2.583 2.545-2.583 1.466 0 2.544 1.108 2.544 2.583 0 1.485-1.078 2.593-2.544 2.593zm13.123 3.467c3.02 0 5.025-1.554 5.025-3.93 0-2.883-2.387-3.256-4.183-3.575-1.08-.193-1.95-.344-1.95-.99 0-.527.422-.838 1.05-.838.71 0 1.197.337 1.197 1.063h3.667c-.044-2.303-1.92-3.843-4.816-3.843-2.912 0-4.854 1.47-4.854 3.75 0 2.757 2.337 3.289 4.1 3.574 1.092.181 1.952.368 1.952 1.024 0 .587-.543.88-1.116.88-.742 0-1.32-.383-1.32-1.214h-3.77c.036 2.463 1.919 4.1 5.018 4.1zm8.1 3.858c2.936 0 4.344-1.257 5.877-4.736l4.764-10.863h-4.206l-2.249 6.263-2.412-6.263H70.31l4.698 10.43c-.53 1.414-.983 1.804-2.48 1.804H71.45v3.365h1.341zm18.504-3.858c3.5 0 5.973-2.515 5.973-6.048S94.796 3.75 91.295 3.75a5.332 5.332 0 00-2.825.784V0H84.6v15.474h2.897l.37-.844c.923.771 2.102 1.216 3.428 1.216zm-.523-3.467c-1.467 0-2.545-1.108-2.545-2.58 0-1.486 1.078-2.594 2.545-2.594 1.466 0 2.544 1.108 2.544 2.593 0 1.473-1.087 2.58-2.544 2.58zm13.598 3.467c1.32 0 2.5-.434 3.43-1.188l.336.804h3.027V4.093h-2.918l-.401.88c-.939-.775-2.135-1.222-3.474-1.222-3.476 0-5.96 2.505-5.96 6.026 0 3.533 2.484 6.07 5.96 6.07zm.524-3.467c-1.467 0-2.545-1.108-2.545-2.593 0-1.475 1.07-2.583 2.545-2.583 1.467 0 2.545 1.108 2.545 2.583 0 1.485-1.078 2.593-2.545 2.593zm12.653 3.095V9.403c0-1.447.702-2.3 1.923-2.3.986 0 1.483.657 1.483 1.98v6.39h3.915V8.543c0-2.897-1.733-4.773-4.373-4.773-1.47 0-2.733.565-3.58 1.508l-.537-1.172h-2.747v11.369h3.916zm13.748 0v-4.808l2.848 4.808h4.616l-3.902-5.95 3.543-5.419h-4.397l-2.708 4.454V0h-3.916v15.474h3.916z"/><g fill="url(#a)"><path d="M10.802 0L0 19.704h5.986L16.789 0z"/><path opacity=".5" d="M18.171 0L7.368 19.704h5.986L24.157 0z"/><path opacity=".15" d="M25.539 0L14.737 19.704h5.986L31.525 0z"/></g></g></svg>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="YouTube">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Pinterest">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.938-3.977.938-3.977s-.239-.479-.239-1.187c0-1.113.645-1.943 1.448-1.943.682 0 1.012.512 1.012 1.127 0 .686-.437 1.712-.663 2.663-.188.796.4 1.446 1.185 1.446 1.422 0 2.515-1.5 2.515-3.664 0-1.915-1.377-3.254-3.342-3.254-2.276 0-3.612 1.707-3.612 3.471 0 .688.265 1.425.595 1.826a.24.24 0 0 1 .056.23c-.061.252-.196.796-.222.907-.035.146-.116.177-.268.107-1-.465-1.624-1.926-1.624-3.1 0-2.523 1.834-4.84 5.286-4.84 2.775 0 4.932 1.977 4.932 4.62 0 2.757-1.739 4.976-4.151 4.976-.811 0-1.573-.421-1.834-.919l-.498 1.902c-.181.695-.669 1.566-.995 2.097A8 8 0 1 0 8 0z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <a href="#about">About Us</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#blog">Blog</a>
+                    <a href="#careers">Careers</a>
+                    <a href="#support">Support</a>
+                    <a href="#privacy">Privacy Policy</a>
+                </div>
+                <div class="footer-right">
+                    <a href="#" class="btn">Request Invite</a>
+                    <p class="copyright">&copy; Easybank. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+        Coded by <a href="https://github.com/Hackerbot24">Hackerbot24</a>.
+    </footer>
+
+    <script>
+    // Mobile menu toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    mobileMenuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Scroll animations
+    const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.animate-fadeInUp');
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            if (elementTop < windowHeight - 100) {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }
+        });
+    };
+
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('load', animateOnScroll);
+
+    // Dark mode toggle
+    const darkModeToggle = document.createElement('button');
+    darkModeToggle.classList.add('dark-mode-toggle');
+    darkModeToggle.innerHTML = '🌓';
+    document.body.appendChild(darkModeToggle);
+
+    const toggleDarkMode = () => {
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+
+    darkModeToggle.addEventListener('click', toggleDarkMode);
+
+    // Check for user's preference
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+    }
+
+    // Intersection Observer for lazy loading images
+    const lazyLoadImages = () => {
+        const images = document.querySelectorAll('img[data-src]');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        images.forEach(img => imageObserver.observe(img));
+    };
+
+    // Call lazy load function
+    lazyLoadImages();
+
+    // Form validation
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.querySelector('input[type="email"]');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value)) {
+                alert('Please enter a valid email address');
+            } else {
+                alert('Thank you for subscribing!');
+                form.reset();
+            }
+        });
+    }
+
+    // Add parallax effect to hero background
+    const heroBackground = document.querySelector('.hero-background');
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.pageYOffset;
+        heroBackground.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+    });
+
+    // Add hover effect to navigation links
+    const navLinksItems = document.querySelectorAll('.nav-links a');
+    navLinksItems.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            link.style.transform = 'translateY(-3px)';
+            link.style.transition = 'transform 0.3s ease';
+        });
+        link.addEventListener('mouseleave', () => {
+            link.style.transform = 'translateY(0)';
+        });
+    });
+
+    // Add scroll-to-top button
+    const scrollToTopBtn = document.createElement('button');
+    scrollToTopBtn.innerHTML = '↑';
+    scrollToTopBtn.classList.add('scroll-to-top');
+    scrollToTopBtn.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 80px;
+        background-color: var(--primary-color);
+        color: var(--white);
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+    `;
+    document.body.appendChild(scrollToTopBtn);
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollToTopBtn.style.opacity = '1';
+        } else {
+            scrollToTopBtn.style.opacity = '0';
+        }
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Add custom cursor
+    const cursor = document.createElement('div');
+    cursor.classList.add('custom-cursor');
+    cursor.style.cssText = `
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--primary-color);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.1s ease;
+    `;
+    document.body.appendChild(cursor);
+
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
+    });
+
+    document.addEventListener('mousedown', () => {
+        cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px) scale(0.8)`;
+    });
+
+    document.addEventListener('mouseup', () => {
+        cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px) scale(1)`;
+    });
+
+    // Add custom cursor interactions
+    const interactiveElements = document.querySelectorAll('a, button, .feature-item, .article-item');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px) scale(1.5)`;
+            cursor.style.mixBlendMode = 'difference';
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px) scale(1)`;
+            cursor.style.mixBlendMode = 'normal';
+        });
+    });
+</script>
+
+</body>
+</html>
